@@ -1,0 +1,3 @@
+[submodule "SubModules/SlidingPanels"]
+	path = SubModules/SlidingPanels
+	url = https://github.com/webmonger/SlidingPanels.Touch.git
