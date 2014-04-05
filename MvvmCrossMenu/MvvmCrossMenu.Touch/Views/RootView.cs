@@ -36,8 +36,8 @@ namespace MvvmCrossMenu.Touch.Views
                EdgesForExtendedLayout = UIRectEdge.None;
 			   
 			// Perform any additional setup after loading the view, typically from a nib.
-			LeftArrowImage.Image = UIImage.FromBundle("Images/LeftArrow.png");
-			UpArrowImage.Image = UIImage.FromBundle("Images/UpArrow.png");
+//			LeftArrowImage.Image = UIImage.FromBundle("Images/LeftArrow.png");
+//			UpArrowImage.Image = UIImage.FromBundle("Images/UpArrow.png");
 
 
 			var set = this.CreateBindingSet<RootView, Core.ViewModels.RootViewModel>();

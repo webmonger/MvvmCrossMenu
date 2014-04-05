@@ -15,7 +15,7 @@ namespace MvvmCrossMenu.Touch
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
 			_window = new UIWindow (UIScreen.MainScreen.Bounds);
-			_window.BackgroundColor = Theme.BackgroundColour;
+			_window.BackgroundColor = UIColor.White;
 
 			var presenter = new MenuPresenter(this, _window);
 			var setup = new Setup(this, presenter);

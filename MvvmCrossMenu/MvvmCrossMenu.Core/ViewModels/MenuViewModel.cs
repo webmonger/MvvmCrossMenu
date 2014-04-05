@@ -19,6 +19,10 @@ namespace MvvmCrossMenu.Core.ViewModels
 			MenuItems = _menuService.GetMenuItems ().Select(x=>new MenuItemViewModel(){Title = x.Title,ViewType = x.ViewType}).ToList();
 		}
 
+		public void Init(){
+
+		}
+
 		private List<MenuItemViewModel> _menuItems;
 		public List<MenuItemViewModel> MenuItems
         {
@@ -42,9 +46,14 @@ namespace MvvmCrossMenu.Core.ViewModels
 		private void DoSelectItem(MenuItemViewModel item)
 		{
 			Mvx.Trace (item.Title + " " + item.ViewType.ToString());
-			switch (item.ViewType) {
+			ShowView (item.ViewType);
+		}
+
+		private void ShowView (MenuType type)
+		{
+			switch (type) {
 			case MenuType.FirstView:
-				ShowViewModel<FirstViewModel>();
+				ShowViewModel<FirstViewModel> ();
 				break;
 			default:
 				Mvx.Trace ("Menu not hooked up");

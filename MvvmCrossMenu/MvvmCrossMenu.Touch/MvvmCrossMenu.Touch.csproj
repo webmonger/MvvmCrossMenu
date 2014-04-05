@@ -152,6 +152,9 @@
   <ItemGroup>
     <BundleResource Include="Images\NavBar\BurgerMenu.png" />
     <BundleResource Include="Images\NavBar\BurgerMenu%402x.png" />
+    <BundleResource Include="Resources\Default.png" />
+    <BundleResource Include="Resources\Default%402x.png" />
+    <BundleResource Include="Resources\Default-568h%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

@@ -82,7 +82,7 @@ namespace MvvmCrossMenu.Touch.Helpers
 
 			// use the first view to create the sliding panels
 			AddPanel<MenuViewModel>(PanelType.LeftPanel, viewController as MvxViewController);
-//			AddPanel<CreationsListViewModel>(PanelType.RightPanel, viewController as MvxViewController);
+			AddPanel<FirstViewModel>(PanelType.RightPanel, viewController as MvxViewController);
 			//AddPanel<BottomPanelViewModel>(PanelType.BottomPanel, viewController as MvxViewController);
 		}
 

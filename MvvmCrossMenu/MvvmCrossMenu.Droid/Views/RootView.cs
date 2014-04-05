@@ -10,7 +10,7 @@ using Cirrious.MvvmCross.Droid.Fragging.Fragments;
 using Cirrious.MvvmCross.ViewModels;
 using MvvmCrossMenu.Core.ViewModels;
 using MvvmCrossMenu.Droid.Helpers;
-using MvvmCrossMenu.Droid.Views.Fragments;
+//using MvvmCrossMenu.Droid.Views.Fragments;
 using MvvmCrossMenu.Models;
 
 namespace MvvmCrossMenu.Droid.Views
@@ -111,12 +111,12 @@ namespace MvvmCrossMenu.Droid.Views
 			    {
 			        case MenuType.FirstView:
 			        {
-			            if (this.SupportFragmentManager.FindFragmentById(Resource.Id.content_frame) as BrowseView != null)
+						if (this.SupportFragmentManager.FindFragmentById(Resource.Id.content_frame) as FirstView != null)
 			            {
 			                return true;
 			            }
 
-			            frag = new BrowseView();
+						frag = new FirstView();
 			            title = Resources.GetString(Resource.String.FirstView);
 			        }
 			            break;

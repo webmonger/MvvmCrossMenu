@@ -16,6 +16,11 @@ namespace MvvmCrossMenu.Touch.Views
 
 		}
 
+		public new MenuViewModel ViewModel{
+			get{ return ViewModel as MenuViewModel; }
+			set{ ViewModel = value; }
+		}
+
 		public override void DidReceiveMemoryWarning ()
 		{
 			// Releases the view if it doesn't have a superview.

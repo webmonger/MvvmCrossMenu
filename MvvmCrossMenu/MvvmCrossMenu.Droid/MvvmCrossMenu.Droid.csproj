@@ -81,14 +81,14 @@
     <Reference Include="Cirrious.MvvmCross.Droid.Fragging">
       <HintPath>..\packages\MvvmCross.HotTuna.Droid.Fragging.3.1.1\lib\MonoAndroid\Cirrious.MvvmCross.Droid.Fragging.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Android.Support.v4">
-      <HintPath>..\Components\xamandroidsupportv4-18-4.19.0.1\lib\android\Xamarin.Android.Support.v4.dll</HintPath>
-    </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.Json">
       <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Json.3.1.1\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Json.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Json.3.1.1\lib\MonoAndroid\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v4">
+      <HintPath>..\Components\xamandroidsupportv4-18-4.19.0.1\lib\android\Xamarin.Android.Support.v4.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -101,9 +101,8 @@
     <Compile Include="Helpers\CustomPresenter.cs" />
     <Compile Include="Views\RootView.cs" />
     <Compile Include="Helpers\CustomActionBarDrawerToggle.cs" />
-    <Compile Include="Views\FirstView.cs" />
-    <Compile Include="Views\Fragments\BrowseView.cs" />
     <Compile Include="Bootstrap\JsonPluginBootstrap.cs" />
+    <Compile Include="Views\Fragments\FirstView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -143,14 +142,10 @@
     <AndroidResource Include="Resources\Drawable-xhdpi\ic_drawer_dark.png" />
     <AndroidResource Include="Resources\Drawable-xhdpi\ic_drawer_light.png" />
     <AndroidResource Include="Resources\Drawable-xhdpi\ic_menu_refresh.png" />
-    <AndroidResource Include="Resources\Layout\fragment_browse.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\Values\Colors.xml" />
     <AndroidResource Include="Resources\Values\Styles.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\item_monkey.axml" />
     <AndroidResource Include="Resources\Values\integers.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

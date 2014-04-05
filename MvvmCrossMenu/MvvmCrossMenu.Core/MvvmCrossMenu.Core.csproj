@@ -65,10 +65,6 @@
       <HintPath>..\packages\MvvmCross.HotTuna.Plugin.DownloadCache.3.1.1\lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.DownloadCache.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Services\MvvmCrossMenu.Models\MvvmCrossMenu.Models.csproj">

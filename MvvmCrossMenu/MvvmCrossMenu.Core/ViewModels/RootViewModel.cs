@@ -64,7 +64,7 @@ namespace MvvmCrossMenu.Core.ViewModels
 
 		private void DoSelectItem(MenuItem item)
 		{
-			//ShowViewModel<DetailViewModel>(item);
+			ShowViewModel(GetSectionForViewModelType(item.ViewType));
 			Mvx.Trace (item.Title + " " + item.ViewType.ToString());
 		}
 

@@ -37,14 +37,13 @@ namespace MvvmCrossMenu.Touch.Helpers
 				} else {
 					if (isRootView)
 						this.MasterNavigationController.ViewControllers = new UIViewController[0];
-					this.MasterNavigationController.PushViewController(viewController, true /*animated*/);
+					this.MasterNavigationController.PushViewController (viewController, true /*animated*/);
 					var slidingPanelNavController = this.MasterNavigationController as SlidingPanelsNavigationViewController;
 
-					var container = slidingPanelNavController.ExistingContainerForType(PanelType.LeftPanel);
+					var container = slidingPanelNavController.ExistingContainerForType (PanelType.LeftPanel);
 
-					if (container.IsVisible)
-					{
-						slidingPanelNavController.HidePanel(container);
+					if (container.IsVisible) {
+						slidingPanelNavController.HidePanel (container);
 					}
 				}
 			}

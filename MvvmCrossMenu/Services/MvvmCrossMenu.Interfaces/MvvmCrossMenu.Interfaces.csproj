@@ -38,7 +38,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MvvmCrossMenu.Models\MvvmCrossMenu.Models.csproj">
       <Project>{A7B47B62-5D01-46F9-9B2C-08F3C8E17B84}</Project>
-      <Name>MyLegoCreations.Models</Name>
+      <Name>MvvmCrossMenu.Models</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
