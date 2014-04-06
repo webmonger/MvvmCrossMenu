@@ -7,10 +7,9 @@
 using MonoTouch.Foundation;
 using System.CodeDom.Compiler;
 
-namespace MyLegoCreations.Touch
+namespace MvvmCrossMenu.Touch.Views.TableViewCells
 {
-	[Register ("MenuTableViewCell")]
-	partial class MenuTableViewCell
+	partial class MenuCollectionViewCell
 	{
 		[Outlet]
 		MonoTouch.UIKit.UILabel Title { get; set; }

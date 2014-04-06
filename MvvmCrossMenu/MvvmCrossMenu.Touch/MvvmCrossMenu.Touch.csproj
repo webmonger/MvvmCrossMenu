@@ -181,14 +181,14 @@
     <Compile Include="Views\FirstView.designer.cs">
       <DependentUpon>FirstView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\TableViewCells\MenuTableViewCell.cs" />
-    <Compile Include="Views\TableViewCells\MenuTableViewCell.designer.cs">
-      <DependentUpon>MenuTableViewCell.cs</DependentUpon>
-    </Compile>
     <Compile Include="Bootstrap\JsonPluginBootstrap.cs" />
     <Compile Include="ConstantsTouch.cs" />
     <Compile Include="Bootstrap\DownloadCachePluginBootstrap.cs" />
     <Compile Include="Helpers\MenuPresenter.cs" />
+    <Compile Include="Views\TableViewCells\MenuCollectionViewCell.cs" />
+    <Compile Include="Views\TableViewCells\MenuCollectionViewCell.designer.cs">
+      <DependentUpon>MenuCollectionViewCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
@@ -220,7 +220,7 @@
     <InterfaceDefinition Include="Views\MenuView_iPad.xib" />
     <InterfaceDefinition Include="Views\FirstView_iPhone.xib" />
     <InterfaceDefinition Include="Views\FirstView_iPad.xib" />
-    <InterfaceDefinition Include="Views\TableViewCells\MenuTableViewCell.xib" />
+    <InterfaceDefinition Include="Views\TableViewCells\MenuCollectionViewCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

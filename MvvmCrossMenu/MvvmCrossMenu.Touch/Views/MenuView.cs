@@ -32,20 +32,16 @@ namespace MvvmCrossMenu.Touch.Views
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad();
-			//this.View.BackgroundColor = Theme.Background;
-			MenuTableView.SeparatorInset = UIEdgeInsets.Zero;
 
-			var source = new MvxSimpleTableViewSource(MenuTableView, MenuTableViewCell.Key, MenuTableViewCell.Key);
-			MenuTableView.Source = source;
-			//MenuTableView.BackgroundColor = Theme.Background;
-			//MenuTableView.SeparatorColor = Theme.HighLight;
-
-			var set = this.CreateBindingSet<MenuView, MenuViewModel>();
-			set.Bind (source).To (vm=> vm.MenuItems);
+			MenuCollectionView.RegisterNibForCell(MenuCollectionViewCell.Nib, MenuCollectionViewCell.Key);
+			var source = new MvxCollectionViewSource (MenuCollectionView, MenuCollectionViewCell.Key);
+			MenuCollectionView.Source = source;
+			var set = this.CreateBindingSet<MenuView, MenuViewModel> ();
+			set.Bind (source).To (vm => vm.MenuItems);
 			set.Bind (source).For (e => e.SelectionChangedCommand).To (vm =>vm.SelectMenuItemCommand);
 			set.Apply();
 
-			MenuTableView.ReloadData();
+			MenuCollectionView.ReloadData ();
 		}
 
 		public override void ViewDidUnload ()
