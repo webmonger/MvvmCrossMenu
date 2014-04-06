@@ -13,14 +13,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yh-LL-t6x">
-                        <rect key="frame" x="20" y="11" width="259" height="21"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yh-LL-t6x">
+                        <rect key="frame" x="20" y="11" width="260" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
-                        <color key="textColor" red="0.83137254901960778" green="0.85098039215686272" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="highlightedColor" red="1" green="0.10983217670000001" blue="0.1435509197" alpha="1" colorSpace="calibratedRGB"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                <constraints>
+                    <constraint firstItem="6yh-LL-t6x" firstAttribute="leading" secondItem="VgS-gb-k7s" secondAttribute="leading" constant="20" id="5Bt-bC-FfI"/>
+                    <constraint firstAttribute="bottom" secondItem="6yh-LL-t6x" secondAttribute="bottom" constant="11" id="Kgs-r7-JZG"/>
+                    <constraint firstItem="6yh-LL-t6x" firstAttribute="top" secondItem="VgS-gb-k7s" secondAttribute="top" constant="11" id="y8x-LL-Sfb"/>
+                    <constraint firstAttribute="trailing" secondItem="6yh-LL-t6x" secondAttribute="trailing" constant="40" id="z6n-jW-1xO"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="Title" destination="6yh-LL-t6x" id="6ay-Ca-8Ap"/>

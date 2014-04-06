@@ -209,7 +209,7 @@ Global
 		{A7B47B62-5D01-46F9-9B2C-08F3C8E17B84} = {273AF724-2DE7-4FAD-894E-6A4A927409D4}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = MvvmCrossMenu.Droid\MvvmCrossMenu.Droid.csproj
+		StartupItem = MvvmCrossMenu.Touch\MvvmCrossMenu.Touch.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

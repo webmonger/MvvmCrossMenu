@@ -4,6 +4,7 @@ using Cirrious.MvvmCross.Touch.Views;
 using MonoTouch.Foundation;
 using MvvmCrossMenu.Core.ViewModels;
 using MvvmCrossMenu.Touch.Views.TableViewCells;
+using MonoTouch.UIKit;
 
 namespace MvvmCrossMenu.Touch.Views
 {
@@ -13,7 +14,6 @@ namespace MvvmCrossMenu.Touch.Views
 		public MenuView ()
 			: base (ConstantsTouch.IsIphone ? "MenuView_iPhone" : "MenuView_iPad", null)
 		{
-
 		}
 
 		public new MenuViewModel ViewModel{
@@ -33,6 +33,7 @@ namespace MvvmCrossMenu.Touch.Views
 		{
 			base.ViewDidLoad();
 			//this.View.BackgroundColor = Theme.Background;
+			MenuTableView.SeparatorInset = UIEdgeInsets.Zero;
 
 			var source = new MvxSimpleTableViewSource(MenuTableView, MenuTableViewCell.Key, MenuTableViewCell.Key);
 			MenuTableView.Source = source;
