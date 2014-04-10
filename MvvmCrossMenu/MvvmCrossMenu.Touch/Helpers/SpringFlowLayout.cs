@@ -16,6 +16,8 @@ namespace MvvmCrossMenu.Touch.Helpers
         private NSMutableSet _visibleIndexPathsSet;
         private NSMutableSet _visibleHeaderAndFooterSet;
         private UIInterfaceOrientation _interfaceOrientation;
+		private int? scrollResistanceFactor = null;
+		private Single _latestDelta;
 
 
         public SpringFlowLayout()
@@ -66,12 +68,12 @@ namespace MvvmCrossMenu.Touch.Helpers
 
     // Step 2: Add any newly visible behaviours.
     // A "newly visible" item is one that is in the itemsInVisibleRect(Set|Array) but not in the visibleIndexPathsSet
-            var newlyVisibleItems =
-                itemsInVisibleRectArray.Select(
-                    x =>
+			var newlyVisibleItems =
+				itemsInVisibleRectArray.Select (
+					x =>
                         (x.RepresentedElementCategory == UICollectionElementCategory.Cell)
-                            ? _visibleIndexPathsSet[x.IndexPath.Row)]
-                            : _visibleHeaderAndFooterSet[x.IndexPath]);
+					? _visibleIndexPathsSet.Skip (x.IndexPath.Row).FirstOrDefault ()
+					: _visibleHeaderAndFooterSet.Skip (x.IndexPath.Row).FirstOrDefault ());
 //    NSArray *newlyVisibleItems = [itemsInVisibleRectArray filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(UICollectionViewLayoutAttributes *item, NSDictionary *bindings) {
 //        return (item.representedElementCategory == UICollectionElementCategoryCell ?
 //                [self.visibleIndexPathsSet containsObject:item.indexPath] : [self.visibleHeaderAndFooterSet containsObject:item.indexPath]) == NO;
@@ -81,83 +83,146 @@ namespace MvvmCrossMenu.Touch.Helpers
     //CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView:self.collectionView];
 
 
-            //newlyVisibleItems.Select();
+			for(int i = 0; i< newlyVisibleItems.Count(); i++){
+
+				UICollectionViewLayoutAttributes item = newlyVisibleItems [i];
 //            [newlyVisibleItems enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes *item, NSUInteger idx, BOOL *stop) {
-        CGPoint center = item.center;
-        UIAttachmentBehavior *springBehaviour = [[UIAttachmentBehavior alloc] initWithItem:item attachedToAnchor:center];
-        
-        springBehaviour.length = 1.0f;
-        springBehaviour.damping = 0.8f;
-        springBehaviour.frequency = 1.0f;
-        
+				PointF center = item.Center;
+				UIAttachmentBehavior springBehaviour = new UIAttachmentBehavior (item, center);
+//			UIAttachmentBehavior springBehaviour = [[UIAttachmentBehavior alloc] initWithItem:item attachedToAnchor:center];
+
+				springBehaviour.Length = 1.0f;
+				springBehaviour.Damping = 0.8f;
+				springBehaviour.Frequency = 1.0f;
+
         // If our touchLocation is not (0,0), we'll need to adjust our item's center "in flight"
-        if (!CGPointEqualToPoint(CGPointZero, touchLocation)) {
-            if (self.scrollDirection == UICollectionViewScrollDirectionVertical) {
-                CGFloat distanceFromTouch = fabsf(touchLocation.y - springBehaviour.anchorPoint.y);
+				if (!PointF.Empty !=touchLocation) {
+					if (ScrollDirection == UICollectionViewScrollDirection.Vertical) {
+						Single distanceFromTouch = touchLocation.Y - springBehaviour.AnchorPoint.Y;
                 
-                CGFloat scrollResistance;
-                if (self.scrollResistanceFactor) scrollResistance = distanceFromTouch / self.scrollResistanceFactor;
-                else scrollResistance = distanceFromTouch / kScrollResistanceFactorDefault;
+						Single scrollResistance;
+						if (scrollResistanceFactor != null) {
+							scrollResistance = distanceFromTouch / scrollResistanceFactor;
+						} else {
+							scrollResistance = distanceFromTouch / kScrollResistanceFactorDefault;
+						}
                 
-                if (self.latestDelta < 0) center.y += MAX(self.latestDelta, self.latestDelta*scrollResistance);
-                else center.y += MIN(self.latestDelta, self.latestDelta*scrollResistance);
+						if (_latestDelta < 0) {
+							center.Y += Math.Max (_latestDelta, _latestDelta * scrollResistance);
+						} else {
+							center.Y += Math.Min (_latestDelta, _latestDelta * scrollResistance);
+						}
                 
-                item.center = center;
+						item.Center = center;
                 
-            } else {
-                CGFloat distanceFromTouch = fabsf(touchLocation.x - springBehaviour.anchorPoint.x);
+					} else {
+						Single distanceFromTouch =  touchLocation.X - springBehaviour.AnchorPoint.X;
                 
-                CGFloat scrollResistance;
-                if (self.scrollResistanceFactor) scrollResistance = distanceFromTouch / self.scrollResistanceFactor;
-                else scrollResistance = distanceFromTouch / kScrollResistanceFactorDefault;
-                
-                if (self.latestDelta < 0) center.x += MAX(self.latestDelta, self.latestDelta*scrollResistance);
-                else center.x += MIN(self.latestDelta, self.latestDelta*scrollResistance);
-                
-                item.center = center;
-            }
-        }
+						Single scrollResistance;
+						if (scrollResistanceFactor) {
+							scrollResistance = distanceFromTouch / scrollResistanceFactor;
+						} else {
+							scrollResistance = distanceFromTouch / kScrollResistanceFactorDefault;
+						}
+						if (_latestDelta < 0) {
+							center.X += Math.Max (_latestDelta, _latestDelta * scrollResistance);
+						} else {
+							center.X += Math.Min (_latestDelta, _latestDelta * scrollResistance);
+						}
+						item.Center = center;
+					}
+				}
         
-        [self.dynamicAnimator addBehavior:springBehaviour];
-        if(item.representedElementCategory == UICollectionElementCategoryCell)
-        {
-            [self.visibleIndexPathsSet addObject:item.indexPath];
-        }
-        else
-        {
-            [self.visibleHeaderAndFooterSet addObject:item.indexPath];
-        }
-    }];
 
-
-        }
+				var snapBehavior = new UISnapBehavior(item,);
+				_dynamicAnimator.AddBehavior (snapBehavior);
+//        [self.dynamicAnimator addBehavior:springBehaviour];
+				if(item.RepresentedElementCategory == UICollectionElementCategory.Cell)
+        		{
+					_visibleIndexPathsSet.Add(item.IndexPath);
+//            [self.visibleIndexPathsSet addObject:item.indexPath];
+				}
+		        else
+		        {
+							_visibleHeaderAndFooterSet.Add(item.IndexPath);
+//            [self.visibleHeaderAndFooterSet addObject:item.indexPath];
+				}
+//    }];
+			}
+		}
 
         public override bool ShouldInvalidateLayoutForBoundsChange(RectangleF newBounds)
         {
-            return true;
-        }
+			UIScrollView scrollView = CollectionView;
 
-        public override UICollectionViewLayoutAttributes[] LayoutAttributesForElementsInRect(RectangleF rect)
-        {
-            var array = base.LayoutAttributesForElementsInRect(rect);
-            var visibleRect = new RectangleF(CollectionView.ContentOffset, CollectionView.Bounds.Size);
+			Single delta;
+			if (ScrollDirection == UICollectionViewScrollDirection.Vertical) {
+				delta = newBounds.Y - scrollView.Bounds.Y;
+			} else {
+				delta = newBounds.X - scrollView.Bounds.X;
+			}
+			_latestDelta = delta;
 
-            foreach (var attributes in array)
-            {
-                if (attributes.Frame.IntersectsWith(rect))
-                {
-                    float distance = visibleRect.GetMidX() - attributes.Center.X;
-                    float normalizedDistance = distance/ACTIVE_DISTANCE;
-                    if (Math.Abs(distance) < ACTIVE_DISTANCE)
-                    {
-                        float zoom = 1 + ZOOM_FACTOR*(1 - Math.Abs(normalizedDistance));
-                        attributes.Transform3D = CATransform3D.MakeScale(zoom, zoom, 1.0f);
-                        attributes.ZIndex = 1;
-                    }
-                }
-            }
+			PointF touchLocation = CollectionView.PanGestureRecognizer.LocationInView;// locationInView:self.collectionView];
 
-            return array;
+			for (int i = 0; i < _dynamicAnimator.Behaviors.Length; i++) {
+				var item = _dynamicAnimator.Behaviors [i];
+
+				UIAttachmentBehavior springBehaviour = new UIAttachmentBehavior (item, center);
+
+				//[_dynamicAnimator.behaviors enumerateObjectsUsingBlock:^(UIAttachmentBehavior *springBehaviour, NSUInteger idx, BOOL *stop) {
+				if (ScrollDirection == UICollectionViewScrollDirection.Vertical) {
+					Single distanceFromTouch = touchLocation.Y - springBehaviour.AnchorPoint.Y);
+
+					Single scrollResistance;
+					if (scrollResistanceFactor){ 
+						scrollResistance = distanceFromTouch / scrollResistanceFactor;
+					}else{ 
+						scrollResistance = distanceFromTouch / kScrollResistanceFactorDefault;
+					}
+					UICollectionViewLayoutAttributes item = springBehaviour.Items.FirstOrDefault();
+					PointF center = item.Center;
+					if (delta < 0)
+					{center.Y += Math.Max(delta, delta*scrollResistance);}
+					else
+					{center.Y += Math.Min(delta, delta*scrollResistance);
+					}
+
+					item.Center = center;
+
+					_dynamicAnimator.UpdateItemUsingCurrentState(item);
+				} else {
+					Single distanceFromTouch = touchLocation.X - springBehaviour.AnchorPoint.X;
+
+					Single scrollResistance;
+					if (scrollResistanceFactor)
+					{scrollResistance = distanceFromTouch / scrollResistanceFactor;
+					}
+					else
+					{scrollResistance = distanceFromTouch / kScrollResistanceFactorDefault;
+					}
+					UICollectionViewLayoutAttributes item = springBehaviour.Items.FirstOrDefault();
+					PointF center = item.Center;
+					if (delta < 0)
+					{center.X += Math.Max(delta, delta*scrollResistance);
+					}
+					else
+					{center.X += Math.Min(delta, delta*scrollResistance);}
+
+					item.Center = center;
+
+					_dynamicAnimator.UpdateItemUsingCurrentState(item);
+				}
+			}
+
+			return false;
+		}
+
+		public override UICollectionViewLayoutAttributes LayoutAttributesForItem (NSIndexPath indexPath)
+		{
+			UICollectionViewLayoutAttributes dynamicLayoutAttributes = _dynamicAnimator.GetLayoutAttributesForCell (indexPath);
+			// Check if dynamic animator has layout attributes for a layout, otherwise use the flow layouts properties. This will prevent crashing when you add items later in a performBatchUpdates block (e.g. triggered by NSFetchedResultsController update)
+			return (dynamicLayoutAttributes != null) ? dynamicLayoutAttributes : base.LayoutAttributesForItem (indexPath);
         }
 
         public override PointF TargetContentOffset(PointF proposedContentOffset, PointF scrollingVelocity)
@@ -177,4 +242,4 @@ namespace MvvmCrossMenu.Touch.Helpers
             }
             return new PointF(proposedContentOffset.X + offSetAdjustment, proposedContentOffset.Y);
         }
-    }
+	}

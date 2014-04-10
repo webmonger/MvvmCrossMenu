@@ -189,6 +189,7 @@
     <Compile Include="Views\TableViewCells\MenuCollectionViewCell.designer.cs">
       <DependentUpon>MenuCollectionViewCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\SpringFlowLayout.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
