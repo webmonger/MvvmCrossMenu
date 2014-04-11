@@ -106,10 +106,20 @@ namespace MvvmCrossMenu.Touch.Helpers
 
             // Step 2: Add any newly visible behaviours.
             // A "newly visible" item is one that is in the itemsInVisibleRect(Set|Array) but not in the visibleIndexPathsSet
-            List<NSIndexPath> newlyVisibleItems =
-                itemsInVisibleRectArray.Select(x => (x.RepresentedElementCategory == UICollectionElementCategory.Cell)
-                    ? _visibleIndexPathsSet.Skip(x.IndexPath.Row).FirstOrDefault()
-                    : _visibleHeaderAndFooterSet.Skip(x.IndexPath.Row).FirstOrDefault()).ToList();
+            List<NSIndexPath> newlyVisibleItems = new List<NSIndexPath>();
+            for (int i = 0; i < itemsInVisibleRectArray.Count(); i++)
+            {
+                var item = itemsInVisibleRectArray[i];
+                newlyVisibleItems.Add((item.RepresentedElementCategory == UICollectionElementCategory.Cell)
+                    ? _visibleIndexPathsSet[item.IndexPath.Row]
+                    : _visibleHeaderAndFooterSet[item.IndexPath.Row]);
+            }
+
+
+//            List<NSIndexPath> newlyVisibleItems =
+//                itemsInVisibleRectArray.Select(x => (x.RepresentedElementCategory == UICollectionElementCategory.Cell)
+//                    ? _visibleIndexPathsSet.Skip(x.IndexPath.Row).FirstOrDefault()
+//                    : _visibleHeaderAndFooterSet.Skip(x.IndexPath.Row).FirstOrDefault()).ToList();
 
 
 
