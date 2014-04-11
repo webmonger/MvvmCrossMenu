@@ -110,9 +110,19 @@ namespace MvvmCrossMenu.Touch.Helpers
             for (int i = 0; i < itemsInVisibleRectArray.Count(); i++)
             {
                 var item = itemsInVisibleRectArray[i];
-                newlyVisibleItems.Add((item.RepresentedElementCategory == UICollectionElementCategory.Cell)
-                    ? _visibleIndexPathsSet[item.IndexPath.Row]
-                    : _visibleHeaderAndFooterSet[item.IndexPath.Row]);
+                NSIndexPath indexPath = null;
+                if (item.RepresentedElementCategory == UICollectionElementCategory.Cell)
+                {
+                    if (!_visibleIndexPathsSet.Contains(item.IndexPath))
+                        indexPath = item.IndexPath;
+                }
+                else
+                {
+                    if (!_visibleHeaderAndFooterSet.Contains(item.IndexPath))
+                        indexPath = item.IndexPath;
+                }
+                if (indexPath != null)
+                    newlyVisibleItems.Add(indexPath);
             }
 
 
