@@ -67,14 +67,13 @@ namespace MvvmCrossMenu.Touch.Helpers
 
 //            List<UICollectionViewLayoutAttributes> noLongerVisibleAttributes =
 //                new List<UICollectionViewLayoutAttributes>();
-            var noLongerVisibleBehaviours = new List<UIAttachmentBehavior>();
-
+            var noLongerVisibleBehaviours = new List<UIDynamicItemBehavior>();
 
             // Step 1: Remove any behaviours that are no longer visible.
             for (int i = 0; i < DynamicAnimator.Behaviors.Count(); i++)
             {
-                var item = DynamicAnimator.Behaviors[i] as UIAttachmentBehavior;
-                var indexPath = CollectionView.IndexPathForCell(item.Items.FirstOrDefault() as UICollectionViewCell);
+                var item = DynamicAnimator.Behaviors[i] as UIDynamicItemBehavior;
+                var indexPath = CollectionView.IndexPathsForVisibleItems.FirstOrDefault();//.IndexPathForCell(item.Items.First() );
                 if (!itemsIndexPathsInVisibleRectSet.Contains(indexPath))
                 {
                     noLongerVisibleBehaviours.Add(item);
