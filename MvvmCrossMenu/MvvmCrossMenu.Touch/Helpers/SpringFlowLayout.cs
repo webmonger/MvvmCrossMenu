@@ -53,7 +53,7 @@ namespace MvvmCrossMenu.Touch.Helpers
 
             // Need to overflow our actual visible rect slightly to avoid flickering.
             RectangleF visibleRect = new RectangleF(CollectionView.Frame.X, CollectionView.Frame.Y,
-                CollectionView.Frame.Width + 100, CollectionView.Frame.Height + 100);
+				CollectionView.Frame.Width + 100, CollectionView.Frame.Height + 100);
             //CGRect visibleRect = CGRectInset((CGRect){.origin = self.collectionView.bounds.origin, .size = self.collectionView.frame.size}, -100, -100);
 
             List<UICollectionViewLayoutAttributes> itemsInVisibleRectArray =

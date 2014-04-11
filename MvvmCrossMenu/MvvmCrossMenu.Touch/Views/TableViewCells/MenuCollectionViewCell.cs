@@ -20,6 +20,10 @@ namespace MvvmCrossMenu.Touch.Views.TableViewCells
 			//			InvokeOnMainThread(()=>{
 			//			Title.TextColor = UIColor.White;
 			//			});
+			var frame = ContentView.Frame;
+			frame.Width = 250;
+			ContentView.Frame = frame;
+			ContentView.Layer.BorderWidth = 2.0f; 
 
 			this.DelayBind (() => {
 				var set = this.CreateBindingSet<MenuCollectionViewCell, MenuItemViewModel> ();
