@@ -3,6 +3,7 @@ using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Touch.Views;
 using MonoTouch.Foundation;
 using MvvmCrossMenu.Core.ViewModels;
+using MvvmCrossMenu.Touch.Helpers;
 using MvvmCrossMenu.Touch.Views.TableViewCells;
 using MonoTouch.UIKit;
 
@@ -36,6 +37,7 @@ namespace MvvmCrossMenu.Touch.Views
 			MenuCollectionView.RegisterNibForCell(MenuCollectionViewCell.Nib, MenuCollectionViewCell.Key);
 			var source = new MvxCollectionViewSource (MenuCollectionView, MenuCollectionViewCell.Key);
 			MenuCollectionView.Source = source;
+		    MenuCollectionView.SetCollectionViewLayout(new SpringFlowLayout(), true);
 			var set = this.CreateBindingSet<MenuView, MenuViewModel> ();
 			set.Bind (source).To (vm => vm.MenuItems);
 			set.Bind (source).For (e => e.SelectionChangedCommand).To (vm =>vm.SelectMenuItemCommand);
