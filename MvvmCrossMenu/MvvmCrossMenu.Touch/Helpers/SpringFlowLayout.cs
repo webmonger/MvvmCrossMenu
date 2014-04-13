@@ -25,10 +25,10 @@ namespace MvvmCrossMenu.Touch.Helpers
 
         public SpringFlowLayout()
         {
-            DynamicAnimator = new UIDynamicAnimator(this);
-            // [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
-            _visibleIndexPathsSet = new List<NSIndexPath>(); // [NSMutableSet set];
-            _visibleHeaderAndFooterSet = new List<NSIndexPath>(); // [[NSMutableSet alloc] init];
+			DynamicAnimator = new UIDynamicAnimator(this);
+			ItemSize = new SizeF(250.0f, 50.0f);
+            _visibleIndexPathsSet = new List<NSIndexPath>();
+            _visibleHeaderAndFooterSet = new List<NSIndexPath>();
         }
 
         public override void PrepareLayout()
