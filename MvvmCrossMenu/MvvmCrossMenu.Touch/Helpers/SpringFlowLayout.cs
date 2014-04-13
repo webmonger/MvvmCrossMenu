@@ -17,7 +17,7 @@ namespace MvvmCrossMenu.Touch.Helpers
         private List<NSIndexPath> _visibleHeaderAndFooterSet;
         private UIInterfaceOrientation _interfaceOrientation;
         private float _latestDelta;
-        private const float KScrollResistanceFactorDefault = 900.0f;
+		private const float KScrollResistanceFactorDefault = 250.0f;
 
         public float ScrollResistanceFactor { get; set; }
 
@@ -67,12 +67,12 @@ namespace MvvmCrossMenu.Touch.Helpers
 
 //            List<UICollectionViewLayoutAttributes> noLongerVisibleAttributes =
 //                new List<UICollectionViewLayoutAttributes>();
-            var noLongerVisibleBehaviours = new List<UIDynamicItemBehavior>();
+			var noLongerVisibleBehaviours = new List<UIAttachmentBehavior>();
 
             // Step 1: Remove any behaviours that are no longer visible.
             for (int i = 0; i < DynamicAnimator.Behaviors.Count(); i++)
             {
-                var item = DynamicAnimator.Behaviors[i] as UIDynamicItemBehavior;
+				var item = DynamicAnimator.Behaviors[i] as UIAttachmentBehavior;
                 var indexPath = CollectionView.IndexPathsForVisibleItems.FirstOrDefault();//.IndexPathForCell(item.Items.First() );
                 if (!itemsIndexPathsInVisibleRectSet.Contains(indexPath))
                 {
