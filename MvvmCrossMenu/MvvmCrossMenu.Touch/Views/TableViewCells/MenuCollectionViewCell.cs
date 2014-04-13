@@ -14,17 +14,14 @@ namespace MvvmCrossMenu.Touch.Views.TableViewCells
 		public static readonly UINib Nib = UINib.FromName ("MenuCollectionViewCell", NSBundle.MainBundle);
 		public static readonly NSString Key = new NSString ("MenuCollectionViewCell");
 
+
 		public MenuCollectionViewCell (IntPtr handle) : base (string.Empty, handle)
 		{
-			//this.BackgroundColor = UIColor.Clear;
-			//			InvokeOnMainThread(()=>{
-			//			Title.TextColor = UIColor.White;
-			//			});
-//			var frame = ContentView.Frame;
-//			frame.Width = 250;
-//			ContentView.Frame = frame;
-//			ContentView.Layer.BorderWidth = 2.0f; 
-
+			BackgroundColor = UIColor.Purple;
+//			var myFrame = this.Frame;
+//			myFrame.Width = 250;
+//			myFrame.Height = 50;
+//			this.Frame = myFrame;
 			this.DelayBind (() => {
 				var set = this.CreateBindingSet<MenuCollectionViewCell, MenuItemViewModel> ();
 				set.Bind(Title).To(vm => vm.Title);
