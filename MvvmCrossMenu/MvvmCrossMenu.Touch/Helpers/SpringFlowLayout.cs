@@ -47,8 +47,7 @@ namespace MvvmCrossMenu.Touch.Helpers
             _interfaceOrientation = UIApplication.SharedApplication.StatusBarOrientation;
 
             // Need to overflow our actual visible rect slightly to avoid flickering.
-            RectangleF visibleRect = new RectangleF(CollectionView.Frame.X, CollectionView.Frame.Y,
-				CollectionView.Frame.Width , CollectionView.Frame.Height );
+            RectangleF visibleRect = RectangleF.Inflate(CollectionView.Bounds, +100, +100);
             
 			List<UICollectionViewLayoutAttributes> itemsInVisibleRectArray =
                 base.LayoutAttributesForElementsInRect(visibleRect).ToList();
