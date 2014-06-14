@@ -26,7 +26,7 @@ namespace MvvmCrossMenu.Touch.Helpers
         public SpringFlowLayout()
         {
 			DynamicAnimator = new UIDynamicAnimator(this);
-			//ItemSize = new SizeF(270.0f, 50.0f);
+			ItemSize = new SizeF(250.0f, 50.0f);
             _visibleIndexPathsSet = new List<NSIndexPath>();
             _visibleHeaderAndFooterSet = new List<NSIndexPath>();
         }
@@ -46,9 +46,9 @@ namespace MvvmCrossMenu.Touch.Helpers
 
             _interfaceOrientation = UIApplication.SharedApplication.StatusBarOrientation;
 
-			// Need to overflow our actual visible rect slightly to avoid flickering.
-			RectangleF visibleRect = RectangleF.Inflate(CollectionView.Bounds, +100 , +100);
-
+            // Need to overflow our actual visible rect slightly to avoid flickering.
+            RectangleF visibleRect = RectangleF.Inflate(CollectionView.Bounds, +100, +100);
+            
 			List<UICollectionViewLayoutAttributes> itemsInVisibleRectArray =
                 base.LayoutAttributesForElementsInRect(visibleRect).ToList();
             
